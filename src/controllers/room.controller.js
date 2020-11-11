@@ -1,9 +1,11 @@
 const { buildLocation } = require('../constants')
+const createRoomTask = require('../tasks/create-room.task')
 
-function create (req, res) {
+async function create (req, res) {
   const location = buildLocation(req)
 
-  res.status(201).location(`${location}/newId`).json({ id: 'newId' })
+  const { id } = await createRoomTask.execute();
+  res.status(201).location(`${location}/${id}`).json({ id })
 }
 
 module.exports = {

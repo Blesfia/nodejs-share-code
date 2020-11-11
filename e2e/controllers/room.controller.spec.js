@@ -1,3 +1,4 @@
+const { expect } = require("chai");
 const request = require("supertest");
 require("../../src");
 
@@ -9,9 +10,9 @@ describe("RoomController", () => {
             .post("/api/v1/rooms")
             .expect(201)
             // Explain restful specification
-            .expect('Location', 'http://localhost:3000/api/v1/rooms/newId')
-            .expect({
-                id: 'newId',
+            .expect('Location', new RegExp('http://localhost:3000/api/v1/rooms/c.{24}'))
+            .then(response => {
+                expect(response.body.id).to.match(/c.{24}/);
             });
         });
     });

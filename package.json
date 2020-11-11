@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:e2e": "mocha e2e/** --exit",
+    "test:e2e": "npx nodemon --exec 'mocha e2e/** --exit'",
+    "test": "mocha src/*/*.spec.js --exit",
+    "test:coverage": "nyc --reporter=lcov mocha e2e/*/*.spec.js src/*/*.spec.js --exit",
     "lint": "eslint src"
   },
   "engines": {
@@ -32,6 +34,8 @@
     "supertest": "^6.0.1"
   },
   "dependencies": {
-    "express": "^4.17.1"
+    "cuid": "^2.1.8",
+    "express": "^4.17.1",
+    "nyc": "^15.1.0"
   }
 }
